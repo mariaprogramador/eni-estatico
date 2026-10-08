@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENI · Escuela Nacional de Instructores | Capacitaciones</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 (iconos) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts (opcional, para estilo) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background-color: #f8faff;
+      scroll-behavior: smooth;
+    }
+    .hero {
+      background: linear-gradient(135deg, #0b2b5c 0%, #1b4a8b 100%);
+      color: white;
+      padding: 4rem 0 3rem;
+      border-bottom-left-radius: 2rem;
+      border-bottom-right-radius: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 25px rgba(0, 40, 80, 0.15);
+    }
+    .hero h1 {
+      font-weight: 700;
+      font-size: 2.8rem;
+      line-height: 1.2;
+    }
+    .hero .lead {
+      font-size: 1.2rem;
+      opacity: 0.92;
+    }
+    .badge-eni {
+      background-color: #ffc107;
+      color: #0b2b5c;
+      font-weight: 600;
+      padding: 0.4rem 1.2rem;
+      border-radius: 50px;
+      display: inline-block;
+      letter-spacing: 0.5px;
+      margin-bottom: 1.2rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+    .card-capacitacion {
+      border: none;
+      border-radius: 1.25rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      background-color: white;
+      height: 100%;
+      border-left: 6px solid #ffc107;
+    }
+    .card-capacitacion:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    .card-capacitacion .card-body {
+      padding: 1.6rem;
+    }
+    .card-capacitacion i {
+      font-size: 2rem;
+      color: #1b4a8b;
+      margin-bottom: 0.8rem;
+    }
+    .card-capacitacion h5 {
+      font-weight: 700;
+      color: #0b2b5c;
+      margin-top: 0.5rem;
+    }
+    .card-capacitacion .fecha {
+      font-size: 0.9rem;
+      color: #4a5b6e;
+      font-weight: 500;
+      background: #f0f4fe;
+      display: inline-block;
+      padding: 0.25rem 0.9rem;
+      border-radius: 40px;
+    }
+    .btn-inscribir {
+      background-color: #ffc107;
+      border: none;
+      color: #0b2b5c;
+      font-weight: 600;
+      padding: 0.6rem 1.8rem;
+      border-radius: 50px;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+    }
+    .btn-inscribir:hover {
+      background-color: #e0a800;
+      color: #0b2b5c;
+      transform: scale(1.02);
+    }
+    .btn-inscribir:active {
+      transform: scale(0.98);
+    }
+    .mision-icon {
+      font-size: 2.8rem;
+      color: #ffc107;
+      margin-bottom: 1rem;
+    }
+    .mision-section {
+      background: white;
+      border-radius: 2rem;
+      padding: 2.5rem 1rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
+    }
+    .footer {
+      background: #0b2b5c;
+      color: rgba(255, 255, 255, 0.8);
+      padding: 1.8rem 0;
+      margin-top: 3.5rem;
+      border-top-left-radius: 2rem;
+      border-top-right-radius: 2rem;
+    }
+    .footer a {
+      color: #ffc107;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    /* Estilos para el modal personalizado (mensaje de éxito) */
+    .modal-inscripcion .modal-header {
+      background: #0b2b5c;
+      color: white;
+      border-bottom: none;
+    }
+    .modal-inscripcion .modal-body {
+      padding: 2rem;
+      font-size: 1.1rem;
+    }
+    .modal-inscripcion .btn-close {
+      filter: invert(1);
+    }
+    .modal-inscripcion .modal-footer {
+      border-top: none;
+    }
+    /* Ajustes responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .hero {
+        padding: 2.5rem 0 2rem;
+      }
+      .mision-section {
+        padding: 1.8rem 0.5rem;
+      }
+    }
+    @media (max-width: 576px) {
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+      .badge-eni {
+        font-size: 0.8rem;
+      }
+      .btn-inscribir {
+        width: 100%;
+      }
+    }
+    /* Animación de aparición */
+    .fade-up {
+      animation: fadeUp 0.7s ease forwards;
+    }
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO / CABECERA -->
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7 text-center text-lg-start">
+          <span class="badge-eni"><i class="fas fa-chalkboard-teacher me-2"></i>Escuela Nacional de Instructores</span>
+          <h1 class="display-5 fw-bold mb-3">Potencia tu vocación, <br>transforma vidas</h1>
+          <p class="lead mb-4">En la ENI creemos que los instructores son el motor del cambio. Formamos, acompañamos y brindamos herramientas para que tu enseñanza deje huella. Inscríbete a nuestras capacitaciones gratuitas y sigue creciendo profesionalmente.</p>
+          <a href="#capacitaciones" class="btn btn-inscribir btn-lg px-4 py-2 me-2">
+            <i class="fas fa-arrow-down me-2"></i>Ver capacitaciones
+          </a>
+          <a href="#mision" class="btn btn-outline-light btn-lg px-4 py-2 mt-2 mt-sm-0">
+            <i class="fas fa-bullseye me-2"></i>Nuestra misión
+          </a>
+        </div>
+        <div class="col-lg-5 d-none d-lg-block text-center">
+          <i class="fas fa-users fa-10x" style="color: rgba(255,255,255,0.15); font-size: 12rem;"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISIÓN (breve) -->
+  <section id="mision" class="container my-5">
+    <div class="mision-section text-center">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="mision-icon"><i class="fas fa-seedling"></i></div>
+          <h2 class="fw-bold mb-3" style="color: #0b2b5c;">Nuestra misión</h2>
+          <p class="fs-5 text-secondary">Impulsar la excelencia educativa mediante la formación integral y continua de instructores, promoviendo la innovación pedagógica, la inclusión y el compromiso social. Queremos que cada instructor encuentre aquí las oportunidades para desarrollar su máximo potencial y, con ello, multiplicar el impacto en sus comunidades.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPACITACIONES / OPORTUNIDADES -->
+  <section id="capacitaciones" class="container my-5 pt-2">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold" style="color: #0b2b5c;">Oportunidades de capacitación</h2>
+      <p class="text-secondary fs-5">Programas diseñados para instructores que quieren innovar y liderar</p>
+    </div>
+    <div class="row g-4">
+      <!-- Capacitación 1 -->
+      <div class="col-md-6 col-lg-4 fade-up">
+        <div class="card-capacitacion h-100">
+          <div class="card-body d-flex flex-column">
+            <i class="fas fa-laptop-code"></i>
+            <h5 class="card-title">Didáctica Digital</h5>
+            <p class="card-text text-secondary flex-grow-1">Herramientas tecnológicas y metodologías activas para entornos virtuales y presenciales híbridos.</p>
+            <div class="mb-3"><span class="fecha"><i class="far fa-calendar-alt me-1"></i> Inicio: 15 mayo 2025</span></div>
+            <button class="btn btn-inscribir mt-auto inscribir-btn" data-capacitacion="Didáctica Digital" data-fecha="15 mayo 2025">Inscribirme <i class="fas fa-arrow-right ms-1"></i></button>
+          </div>
+        </div>
+      </div>
+      <!-- Capacitación 2 -->
+      <div class="col-md-6 col-lg-4 fade-up" style="animation-delay: 0.1s;">
+        <div class="card-capacitacion h-100">
+          <div class="card-body d-flex flex-column">
+            <i class="fas fa-users-cog"></i>
+            <h5 class="card-title">Liderazgo e Innovación</h5>
+            <p class="card-text text-secondary flex-grow-1">Desarrolla habilidades de liderazgo, gestión de equipos y pensamiento creativo para el aula.</p>
+            <div class="mb-3"><span class="fecha"><i class="far fa-calendar-alt me-1"></i> Inicio: 3 junio 2025</span></div>
+            <button class="btn btn-inscribir mt-auto inscribir-btn" data-capacitacion="Liderazgo e Innovación" data-fecha="3 junio 2025">Inscribirme <i class="fas fa-arrow-right ms-1"></i></button>
+          </div>
+        </div>
+      </div>
+      <!-- Capacitación 3 -->
+      <div class="col-md-6 col-lg-4 fade-up" style="animation-delay: 0.2s;">
+        <div class="card-capacitacion h-100">
+          <div class="card-body d-flex flex-column">
+            <i class="fas fa-hand-holding-heart"></i>
+            <h5 class="card-title">Educación Inclusiva</h5>
+            <p class="card-text text-secondary flex-grow-1">Estrategias para atender la diversidad en el aula y promover la equidad educativa.</p>
+            <div class="mb-3"><span class="fecha"><i class="far fa-calendar-alt me-1"></i> Inicio: 20 junio 2025</span></div>
+            <button class="btn btn-inscribir mt-auto inscribir-btn" data-capacitacion="Educación Inclusiva" data-fecha="20 junio 2025">Inscribirme <i class="fas fa-arrow-right ms-1"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Nota pequeña -->
+    <p class="text-center text-muted mt-4 small"><i class="fas fa-info-circle me-1"></i> Cupos limitados. Una vez inscrito, recibirás un correo con los detalles de acceso.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+          <i class="fas fa-chalkboard-teacher me-2" style="color: #ffc107;"></i>
+          <span class="fw-semibold">Escuela Nacional de Instructores</span> — Formando a quienes forman.
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="me-3"><i class="fab fa-x-twitter"></i></a>
+          <a href="#" class="me-3"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+      <hr class="mt-3 bg-light opacity-25">
+      <div class="text-center small opacity-75">
+        &copy; 2025 ENI. Todos los derechos reservados. 
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DE CONFIRMACIÓN (éxito) -->
+  <div class="modal fade modal-inscripcion" id="modalInscripcion" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fas fa-check-circle me-2" style="color: #ffc107;"></i>Inscripción exitosa</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body text-center" id="modalMensaje">
+          <!-- Contenido dinámico -->
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-inscribir" data-bs-dismiss="modal">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (con Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Script personalizado -->
+  <script>
+    (function() {
+      // Referencias al modal
+      const modalElement = document.getElementById('modalInscripcion');
+      const modal = new bootstrap.Modal(modalElement);
+      const modalMensaje = document.getElementById('modalMensaje');
+
+      // Escuchar clic en todos los botones "Inscribirme"
+      const botones = document.querySelectorAll('.inscribir-btn');
+      botones.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+
+          // Obtener datos del botón
+          const capacitacion = this.dataset.capacitacion || 'Capacitación';
+          const fecha = this.dataset.fecha || 'próximamente';
+
+          // Validar que existan los datos (por si acaso)
+          if (!capacitacion) return;
+
+          // Construir mensaje personalizado
+          modalMensaje.innerHTML = `
+            <i class="fas fa-check-circle fa-3x mb-3" style="color: #1b4a8b;"></i>
+            <p class="fs-5 mb-2">¡Te has inscrito correctamente!</p>
+            <p class="mb-1"><strong>Capacitación:</strong> ${capacitacion}</p>
+            <p class="mb-3"><strong>Fecha de inicio:</strong> ${fecha}</p>
+            <p class="text-secondary small">Recibirás un correo con los detalles de acceso e instrucciones.</p>
+          `;
+
+          // Mostrar el modal
+          modal.show();
+
+          // Opcional: deshabilitar botón después de inscribirse (solo para demo)
+          // this.disabled = true; // Si se desea evitar múltiples inscripciones
+          // this.innerHTML = 'Inscrito <i class="fas fa-check ms-1"></i>'; 
+          // (Lo dejamos comentado para que se pueda probar varias veces)
+        });
+      });
+
+      // Cerrar modal al hacer clic en el botón "Aceptar" ya está manejado por data-bs-dismiss
+    })();
+  </script>
+</body>
+</html>
